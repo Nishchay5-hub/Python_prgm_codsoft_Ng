@@ -1,0 +1,36 @@
+import random
+import string
+
+def generate_password(length=12, use_upper=True, use_lower=True, use_digits=True, use_symbols=True):
+  
+    upper = string.ascii_uppercase if use_upper else ''
+    lower = string.ascii_lowercase if use_lower else ''
+    digits = string.digits if use_digits else ''
+    symbols = string.punctuation if use_symbols else ''
+
+    
+    all_characters = upper + lower + digits + symbols
+
+    if not all_characters:
+        return "Error: At least one character type must be selected."
+
+    
+    password = ''.join(random.choice(all_characters) for _ in range(length))
+    return password
+
+def main():
+    print("Welcome to the Simple Password Generator!")
+
+    # Get user input
+    length = int(input("Enter password length (default is 12): ") or 12)
+    use_upper = input("Include uppercase letters? (y/n, default y): ").lower() != 'n'
+    use_lower = input("Include lowercase letters? (y/n, default y): ").lower() != 'n'
+    use_digits = input("Include digits? (y/n, default y): ").lower() != 'n'
+    use_symbols = input("Include symbols? (y/n, default y): ").lower() != 'n'
+
+    
+    password = generate_password(length, use_upper, use_lower, use_digits, use_symbols)
+    print(f"\nYour generated password is: {password}")
+
+if __name__ == "__main__":
+    main()
